@@ -4,11 +4,12 @@ def main(filename):
   tweets = []
   for line in open(filename, 'r'):
     tweets.append(json.loads(line))
-  top_tweets(tweets)
+  result = top_tweets(tweets)
+  print(result)
 
 def top_tweets(tweets):
-  mergeSort(tweets, 0, len(tweets)-1)
-  pass
+  mergeSortTweet(tweets, 0, len(tweets)-1)
+  return tweets[len(tweets)-10:len(tweets)]
 
 def top_users():
   pass
@@ -20,7 +21,7 @@ def top_hashtags():
   pass
 
 # REF: https://www.geeksforgeeks.org/python-program-for-merge-sort/#:~:text=Merge%20Sort%20is%20a%20Divide,assumes%20that%20arr%5Bl..
-def merge(arr, l, m, r):
+def mergeTweet(arr, l, m, r):
     n1 = m - l + 1
     n2 = r - m
  
@@ -41,7 +42,7 @@ def merge(arr, l, m, r):
     k = l     # Initial index of merged subarray
  
     while i < n1 and j < n2:
-        if L[i] <= R[j]:
+        if L[i]["retweetCount"] <= R[j]["retweetCount"]:
             arr[k] = L[i]
             i += 1
         else:
@@ -67,7 +68,7 @@ def merge(arr, l, m, r):
 # sub-array of arr to be sorted
  
  
-def mergeSort(arr, l, r):
+def mergeSortTweet(arr, l, r):
     if l < r:
  
         # Same as (l+r)//2, but avoids overflow for
@@ -75,8 +76,8 @@ def mergeSort(arr, l, r):
         m = l+(r-l)//2
  
         # Sort first and second halves
-        mergeSort(arr, l, m)
-        mergeSort(arr, m+1, r)
-        merge(arr, l, m, r)
+        mergeSortTweet(arr, l, m)
+        mergeSortTweet(arr, m+1, r)
+        mergeTweet(arr, l, m, r)
  
 main('data.json')
