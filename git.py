@@ -24,7 +24,7 @@ def top_days(tweets):
     if tweet["date"] in days:
       days_array[days[tweet["date"]]]["count"] += 1
     else:
-      days_array.push({"date": tweet["date"], "count": 1})
+      days_array.append({"date": tweet["date"], "count": 1})
       pos = len(days_array) - 1
       days[tweet["date"]] = pos
   mergeSortDay(days_array, 0, len(days_array)-1)
