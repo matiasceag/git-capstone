@@ -1,11 +1,9 @@
 import json
 
 def main(filename):
-  print(filename)
-  f = open(filename, 'r')
-  data = json.load(f)
-
-  pass
+  tweets = []
+  for line in open(filename, 'r'):
+    tweets.append(json.loads(line))
 
 def top_tweets():
   pass
@@ -19,4 +17,4 @@ def top_days():
 def top_hashtags():
   pass
 
-main("data.json")
+main('data.json')
